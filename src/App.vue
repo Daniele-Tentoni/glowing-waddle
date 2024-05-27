@@ -1,5 +1,10 @@
 <script setup lang="ts">
-const links = ['home'];
+import { RouterView } from 'vue-router';
+import { useCart } from './stores/cart';
+
+const links = ['home', 'shop'];
+
+const cart = useCart();
 </script>
 
 <template>
@@ -8,7 +13,13 @@ const links = ['home'];
       <v-container class="mx-auto d-flex align-center justify-center">
         <v-avatar class="me-4" color="grey-darken-1" size="32"></v-avatar>
 
-        <v-btn v-for="link in links" :key="link" :text="link" variant="text"></v-btn>
+        <VBtn
+          v-for="link in links"
+          :key="link"
+          :text="link"
+          :to="{ name: link }"
+          variant="text"
+        ></VBtn>
 
         <v-spacer></v-spacer>
 
@@ -23,6 +34,9 @@ const links = ['home'];
             single-line
           ></v-text-field>
         </v-responsive>
+        <VBtn :to="{ name: 'cart' }" stacked>
+          <VBadge :content="cart.itemNum"> <VIcon>mdi-cart-variant</VIcon></VBadge>
+        </VBtn>
       </v-container>
     </v-app-bar>
 
@@ -43,7 +57,7 @@ const links = ['home'];
 
           <v-col>
             <v-sheet min-height="70vh" rounded="lg">
-              <!--  -->
+              <RouterView></RouterView>
             </v-sheet>
           </v-col>
         </v-row>
