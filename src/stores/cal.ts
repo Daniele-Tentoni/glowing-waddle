@@ -1,3 +1,4 @@
+import { useStorage } from '@vueuse/core';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import { useDate } from 'vuetify';
@@ -26,6 +27,7 @@ export type Cal = {
 };
 
 export const useCal = defineStore('cal', () => {
+  const lastWrapped = useStorage('cal.lastWrapped', 0, localStorage, { mergeDefaults: true });
   const cal = ref<Cal>({
     name: 'first',
     days: [

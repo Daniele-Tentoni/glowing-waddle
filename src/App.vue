@@ -1,43 +1,47 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
 import { useCart } from './stores/cart';
+import { onMounted } from 'vue';
+import { useTitle } from '@vueuse/core';
 
 const links = ['home', 'shop'];
 
 const cart = useCart();
+
+onMounted(() => {
+  const title = useTitle();
+  title.value = 'Glowing Waddle';
+});
 </script>
 
 <template>
   <v-app id="inspire">
     <v-app-bar flat>
-      <v-container class="mx-auto d-flex align-center justify-center">
-        <v-avatar class="me-4" color="grey-darken-1" size="32"></v-avatar>
+      <VAppBarTitle>Glowing Waddle</VAppBarTitle>
+      <VBtn
+        v-for="link in links"
+        :key="link"
+        :text="link"
+        :to="{ name: link }"
+        variant="text"
+      ></VBtn>
 
-        <VBtn
-          v-for="link in links"
-          :key="link"
-          :text="link"
-          :to="{ name: link }"
-          variant="text"
-        ></VBtn>
+      <v-spacer></v-spacer>
 
-        <v-spacer></v-spacer>
-
-        <v-responsive max-width="160">
-          <v-text-field
-            density="compact"
-            label="Search"
-            rounded="lg"
-            variant="solo-filled"
-            flat
-            hide-details
-            single-line
-          ></v-text-field>
-        </v-responsive>
-        <VBtn :to="{ name: 'cart' }" stacked>
-          <VBadge :content="cart.itemNum"> <VIcon>mdi-cart-variant</VIcon></VBadge>
-        </VBtn>
-      </v-container>
+      <v-responsive max-width="160">
+        <v-text-field
+          density="compact"
+          label="Search"
+          rounded="lg"
+          variant="solo-filled"
+          flat
+          hide-details
+          single-line
+        ></v-text-field>
+      </v-responsive>
+      <VBtn :to="{ name: 'cart' }" stacked data-test="cart-icon-button">
+        <VBadge :content="cart.itemNum"> <VIcon>mdi-cart-variant</VIcon></VBadge>
+      </VBtn>
     </v-app-bar>
 
     <v-main>

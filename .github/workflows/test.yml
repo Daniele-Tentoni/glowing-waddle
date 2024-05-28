@@ -1,0 +1,73 @@
+name: Test each PR against main
+
+on:
+    pull_request:
+        branches: ["main", "next"]
+        paths: ["cypress", "src"]
+
+concurrency:
+    group: 'test'
+    cancel-in-progress: true
+
+jobs:
+    unit-test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Set up Node
+              uses: actions/setup-node@v4
+              with:
+                node-version: "lts/*"
+                cache: 'npm'
+            - name: Install deps
+              run: npm ci
+            - name: Unit Tests
+              run: npm run cov
+    
+    install:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Cypress install
+              uses: cypress-io/github-action@v6
+              with:
+                # Disable running of tests within install job
+                runTests: false
+                build: npm run build
+            - name: Save build folder
+              uses: actions/upload-artifact@v4
+              with:
+                  name: build
+                  if-no-files-found: error
+                  path: dist
+    
+    cypress-run:
+        runs-on: ${{ matrix.browser }}
+        needs: install
+        strategy:
+            # don't fail the entire matrix on failure
+            fail-fast: false
+            matrix:
+                browser: ["chrome", "firefox", "edge"]
+                # run copies of the current job in parallel
+                containers: [1, 2, 3]
+                os: ["ubuntu-latest"," windows-latest"]
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v4
+
+            -   name: Download the build folder
+                uses: actions/download-artifact@v4
+                with:
+                    name: build
+
+            -   name: Cypress run
+                uses: cypress-io/github-action@v6
+                with:
+                    record: true
+                    parallel: true
+                    group: 'UI-Chrome'
+                    start: npm run preview
+                    browser: ${{ matrix.browser }}

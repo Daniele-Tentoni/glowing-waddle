@@ -8,7 +8,7 @@ const day = computed(() => cal.firstUnwrappedDay);
 
 <template>
   <VCard v-if="!day"> No day selected {{ cal.day }} </VCard>
-  <VCard v-else width="500">
+  <VCard v-else width="500" class="ma-auto" elevation="20">
     <VCardTitle>
       <VRow>
         <VCol> Sabato </VCol>
