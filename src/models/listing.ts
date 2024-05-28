@@ -22,8 +22,8 @@ export class Listing {
 }
 
 export const calendariFilosofici: Listing[] = [
-  new Listing('aristotele','Calendario di Aristotele', getRandomPrice(10, 100)),
-  new Listing('platone','Calendario di Platone', getRandomPrice(10, 100)),
+  new Listing('aristotele', 'Calendario di Aristotele', getRandomPrice(10, 100)),
+  new Listing('platone', 'Calendario di Platone', getRandomPrice(10, 100)),
   new Listing('socrate', 'Calendario di Socrate', getRandomPrice(10, 100)),
   new Listing('epicuro', 'Calendario di Epicuro', getRandomPrice(10, 100)),
   new Listing('zenone', 'Calendario di Zenone', getRandomPrice(10, 100)),
