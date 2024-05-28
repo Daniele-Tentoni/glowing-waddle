@@ -20,6 +20,7 @@ const day = computed(() => cal.firstUnwrappedDay);
       <span class="text-h4">{{ day?.num }}</span>
       <br />
       <i>{{ day?.text }}</i>
+      <VImg src="https://picsum.photos/350/165?random" height="125" cover></VImg>
     </VCardText>
     <VCardActions>
       <VBtn @click="cal.takeAway(day?.num)">Strappa</VBtn>
