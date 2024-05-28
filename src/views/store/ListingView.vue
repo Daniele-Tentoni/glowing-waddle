@@ -11,4 +11,6 @@ const listing = computed(() => {
   return shop.shop.find((f) => f.id === id.value);
 });
 </script>
-<template><span>Listing {{ listing?.name }}</span></template>
+<template>
+  <span>Listing {{ listing?.name }}</span>
+</template>

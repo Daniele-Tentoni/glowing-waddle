@@ -24,9 +24,9 @@ describe('The shop workflow', () => {
   });
 
   it('Open a detail page', () => {
-    cy.visit('/store')
-    cy.get('[data-test="info-icon"]').eq(0).click()
-    cy.url().should('include', 'listing').should('include', 'aristotele')
-    cy.contains('span', 'Calendario di Aristotele')
-  })
+    cy.visit('/store');
+    cy.get('[data-test="info-icon"]').eq(0).click();
+    cy.url().should('include', 'listing').should('include', 'aristotele');
+    cy.contains('span', 'Calendario di Aristotele');
+  });
 });
