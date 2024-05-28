@@ -56,8 +56,10 @@
     "vue-tsc": "^2.0.11"
   },
   "lint-staged": {
-    "*.{vue,js,jsx,cjs,mjs,ts,tsx,cts,mts}": "eslint --cache --fix",
-    "*.{src,public,cypress}/": "prettier --write",
-    "*.{json,yml}": "prettier --write"
+    "*.{vue,js,jsx,cjs,mjs,ts,tsx,cts,mts}": [
+      "prettier --write",
+      "eslint --cache --fix"
+    ],
+    "**/*.{json,yml}": "prettier --write"
   }
 }
