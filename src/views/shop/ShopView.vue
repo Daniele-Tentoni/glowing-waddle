@@ -14,7 +14,7 @@ function addToCart(shopItem: Listing) {
 }
 
 function removeFromCart(shopItem: Listing) {
-  cart.remove(shopItem.name)
+  cart.remove(shopItem.name);
 }
 
 function info() {}
@@ -42,7 +42,11 @@ const filtered = computed(() => {
   <VContainer>
     <VRow>
       <VCol>
-        <VCheckbox data-test="owned-filter" v-model="excludeOwned" label="Exclude owned"></VCheckbox>
+        <VCheckbox
+          data-test="owned-filter"
+          v-model="excludeOwned"
+          label="Exclude owned"
+        ></VCheckbox>
       </VCol>
       <VSpacer></VSpacer>
       <VCol>
@@ -63,7 +67,9 @@ const filtered = computed(() => {
               data-test="to-chart"
               >To Cart</VBtn
             >
-            <VBtn v-else @click="removeFromCart(item)" prepend-icon="mdi-cart-arrow-up">Remove</VBtn>
+            <VBtn v-else @click="removeFromCart(item)" prepend-icon="mdi-cart-arrow-up"
+              >Remove</VBtn
+            >
             <VBtn @click="info" icon="mdi-information-symbol"></VBtn>
           </VCardActions>
         </VCard>

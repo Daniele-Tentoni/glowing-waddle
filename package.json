@@ -14,8 +14,8 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src public cypress",
-    "format:ci": "prettier --check src public cypress",
+    "format": "prettier --write src public cypress .github",
+    "format:ci": "prettier --check src public cypress .github",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -58,6 +58,6 @@
   "lint-staged": {
     "*.{vue,js,jsx,cjs,mjs,ts,tsx,cts,mts}": "eslint --cache --fix",
     "*.{src,public,cypress}/": "prettier --write",
-    "*.{json}": "prettier --write"
+    "*.{json,yml}": "prettier --write"
   }
 }

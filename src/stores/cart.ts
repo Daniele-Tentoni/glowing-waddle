@@ -18,7 +18,7 @@ export const useCart = defineStore('cart', () => {
   }
 
   function remove(id: string) {
-    cart.value.items = cart.value.items.filter(f => f.name !== id)
+    cart.value.items = cart.value.items.filter((f) => f.name !== id);
   }
 
   const itemNum = computed(() => cart.value?.items.length ?? 0);

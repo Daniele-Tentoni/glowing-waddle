@@ -1,21 +1,21 @@
 import { getRandomPrice } from './utils';
 
 export enum TagEnum {
-  filosofico = "Filosofico",
-  buffo = "Buffo"
+  filosofico = 'Filosofico',
+  buffo = 'Buffo',
 }
 
-export type Tag = keyof typeof TagEnum
+export type Tag = keyof typeof TagEnum;
 
 export class Listing {
   name: string;
   price: number;
-  tags: TagEnum[]
+  tags: TagEnum[];
 
   constructor(name: string, price: number, tags: TagEnum[] = []) {
-    this.name = name
-    this.price = price
-    this.tags = tags
+    this.name = name;
+    this.price = price;
+    this.tags = tags;
   }
 }
 
