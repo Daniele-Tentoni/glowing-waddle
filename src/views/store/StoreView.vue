@@ -18,9 +18,9 @@ function removeFromCart(shopItem: Listing) {
   cart.remove(shopItem.name);
 }
 
-const router = useRouter()
+const router = useRouter();
 function info(id: string) {
-  router.push({name: "listing-details", params: { id }})
+  router.push({ name: 'listing-details', params: { id } });
 }
 
 const excludeOwned = ref<boolean>(false);
@@ -89,7 +89,12 @@ const filtered = computed(() => {
             <VSpacer></VSpacer>
             <VTooltip text="More info">
               <template #activator="{ props }">
-                <VBtn v-bind="props" @click="info(item.id)" icon="mdi-information-symbol" data-test="info-icon"></VBtn>
+                <VBtn
+                  v-bind="props"
+                  @click="info(item.id)"
+                  icon="mdi-information-symbol"
+                  data-test="info-icon"
+                ></VBtn>
               </template>
             </VTooltip>
           </VCardActions>

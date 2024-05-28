@@ -1,4 +1,4 @@
-import { useStorage } from '@vueuse/core';
+import { useLocalStorage } from '@vueuse/core';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import { useDate } from 'vuetify';
@@ -28,9 +28,9 @@ export type Cal = {
 };
 
 export const useCal = defineStore('cal', () => {
-  const lastWrapped = useStorage('cal.lastWrapped', 0, localStorage, { mergeDefaults: true });
+  const lastWrapped = useLocalStorage('cal.lastWrapped', 0, { mergeDefaults: true });
   const cal = ref<Cal>({
-    id: "first",
+    id: 'first',
     name: 'Primo calendario',
     days: [
       { num: 147, text: 'Questa è una massima' },

@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue';
 import StoreView from '../views/store/StoreView.vue';
 import CartView from '@/views/cart/CartView.vue';
 import CalendarView from '@/views/calendar/CalendarView.vue';
-import ListingView from "@/views/store/ListingView.vue"
+import ListingView from '@/views/store/ListingView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,21 +12,23 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-      children: [{
-        path: ':id',
-        name: 'calendar',
-        component: CalendarView
-      }]
+      children: [
+        {
+          path: ':id',
+          name: 'calendar',
+          component: CalendarView,
+        },
+      ],
     },
     {
       path: '/store',
       name: 'store',
-      component: StoreView
+      component: StoreView,
     },
     {
       path: '/listing/:id',
       name: 'listing-details',
-      component: ListingView
+      component: ListingView,
     },
     {
       path: '/cart',
