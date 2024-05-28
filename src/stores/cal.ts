@@ -22,6 +22,7 @@ export class D implements Day {
 }
 
 export type Cal = {
+  id: string;
   name: string;
   days: Day[];
 };
@@ -29,7 +30,8 @@ export type Cal = {
 export const useCal = defineStore('cal', () => {
   const lastWrapped = useStorage('cal.lastWrapped', 0, localStorage, { mergeDefaults: true });
   const cal = ref<Cal>({
-    name: 'first',
+    id: "first",
+    name: 'Primo calendario',
     days: [
       { num: 147, text: 'Questa è una massima' },
       { num: 148, text: 'Questa è una massima' },

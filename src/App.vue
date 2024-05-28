@@ -4,7 +4,10 @@ import { useCart } from './stores/cart';
 import { onMounted } from 'vue';
 import { useTitle } from '@vueuse/core';
 
-const links = ['home', 'shop'];
+const links = [
+  { title: 'home', icon: 'mdi-home' },
+  { title: 'store', icon: 'mdi-store' },
+];
 
 const cart = useCart();
 
@@ -20,9 +23,10 @@ onMounted(() => {
       <VAppBarTitle>Glowing Waddle</VAppBarTitle>
       <VBtn
         v-for="link in links"
-        :key="link"
-        :text="link"
-        :to="{ name: link }"
+        :key="link.title"
+        :text="link.title"
+        :to="{ name: link.title }"
+        :prepend-icon="link.icon"
         variant="text"
       ></VBtn>
 
@@ -47,18 +51,6 @@ onMounted(() => {
     <v-main>
       <v-container>
         <v-row>
-          <v-col cols="2">
-            <v-sheet rounded="lg">
-              <v-list rounded="lg">
-                <v-list-item v-for="n in 5" :key="n" :title="`List Item ${n}`" link></v-list-item>
-
-                <v-divider class="my-2"></v-divider>
-
-                <v-list-item color="grey-lighten-4" title="Refresh" link></v-list-item>
-              </v-list>
-            </v-sheet>
-          </v-col>
-
           <v-col>
             <v-sheet min-height="70vh" rounded="lg">
               <RouterView></RouterView>

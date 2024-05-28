@@ -22,6 +22,8 @@ jobs:
           cache: 'npm'
       - name: Install deps
         run: npm ci
+      - name: Format
+        run: npm run format:ci
       - name: Unit Tests
         run: npm run cov
 

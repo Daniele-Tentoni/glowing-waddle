@@ -50,7 +50,7 @@ const filtered = computed(() => {
       </VCol>
       <VSpacer></VSpacer>
       <VCol>
-        <VTextField data-test="text-filter" label="Filter" v-model="textFilter"></VTextField>
+        <VTextField prepend-inner-icon="mdi-magnify" data-test="text-filter" label="Filter" v-model="textFilter"></VTextField>
       </VCol>
     </VRow>
     <VRow>
@@ -70,7 +70,11 @@ const filtered = computed(() => {
             <VBtn v-else @click="removeFromCart(item)" prepend-icon="mdi-cart-arrow-up"
               >Remove</VBtn
             >
-            <VBtn @click="info" icon="mdi-information-symbol"></VBtn>
+            <VTooltip text="More info">
+              <template #activator="{ props }">
+                <VBtn v-bind="props" @click="info" icon="mdi-information-symbol"></VBtn>
+              </template>
+            </VTooltip>
           </VCardActions>
         </VCard>
       </VCol>
