@@ -5,23 +5,30 @@ import CheckoutDialog from '@/components/checkout/CheckoutDialog.vue';
 
 const cart = useCart();
 
+const empty = computed(() => cart.cart.items?.length === 0);
+
 const total = computed(() => cart.cart.items.reduce((a, b) => a + b.price, 0));
 </script>
 <template>
-  <VList>
-    <VListItem
-      v-for="(item, i) in cart.cart.items"
-      :key="i"
-      :title="item.name"
-      :subtitle="item.price"
-    >
-      <VBtn prepend-icon="mdi-cart-arrow-up">Remove</VBtn>
-    </VListItem>
-  </VList>
-  <VRow>
-    <VCol>Total: {{ total }}</VCol>
-    <VCol>
-      <CheckoutDialog></CheckoutDialog>
-    </VCol>
-  </VRow>
+  <VSheet v-if="empty">
+    <span>Your cart is empty.</span>
+  </VSheet>
+  <VContainer v-else>
+    <VList>
+      <VListItem
+        v-for="(item, i) in cart.cart.items"
+        :key="i"
+        :title="item.name"
+        :subtitle="item.price"
+      >
+        <VBtn prepend-icon="mdi-cart-arrow-up">Remove</VBtn>
+      </VListItem>
+    </VList>
+    <VRow>
+      <VCol>Total: {{ total }}</VCol>
+      <VCol>
+        <CheckoutDialog></CheckoutDialog>
+      </VCol>
+    </VRow>
+  </VContainer>
 </template>

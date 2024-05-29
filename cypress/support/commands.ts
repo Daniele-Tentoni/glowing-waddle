@@ -24,6 +24,21 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('buy', (num: number) => {
+  cy.visit('/store');
+  for (let i = 0; i < num; i++) {
+    cy.get('button[data-test="to-chart"]').eq(0).click();
+  }
+});
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      buy(num: number): Chainable<void>;
+    }
+  }
+}
 //
 // declare global {
 //   namespace Cypress {

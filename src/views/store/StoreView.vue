@@ -1,27 +1,13 @@
 <script setup lang="ts">
-import type { Listing } from '@/models/listing';
-import { useCart, type CartItem } from '@/stores/cart';
+import ListingCard from '@/components/store/ListingCard.vue';
+import { useCart } from '@/stores/cart';
 import { useShop } from '@/stores/shop';
 import { useDebounce } from '@vueuse/core';
 import { computed, ref } from 'vue';
-import { useRouter } from 'vue-router';
 
 const shop = useShop();
 
 const cart = useCart();
-
-function addToCart(shopItem: Listing) {
-  cart.add({ name: shopItem.name, price: shopItem.price } as CartItem);
-}
-
-function removeFromCart(shopItem: Listing) {
-  cart.remove(shopItem.name);
-}
-
-const router = useRouter();
-function info(id: string) {
-  router.push({ name: 'listing-details', params: { id } });
-}
 
 const excludeOwned = ref<boolean>(false);
 
@@ -64,41 +50,7 @@ const filtered = computed(() => {
     </VRow>
     <VRow>
       <VCol cols="4" lg="3" v-for="(item, i) in filtered" :key="i">
-        <VCard data-test="cart-item-card">
-          <VImg
-            class="align-end text-white"
-            src="https://picsum.photos/350/165?random"
-            height="125"
-            cover
-          >
-          </VImg>
-          <VCardTitle>{{ item.name }}</VCardTitle>
-          <VCardSubtitle>{{ item }}</VCardSubtitle>
-          <VCardText>{{ item.price }} </VCardText>
-          <VCardActions>
-            <VBtn
-              v-if="!cart.inCart(item.name)"
-              @click="addToCart(item)"
-              prepend-icon="mdi-cart-arrow-down"
-              data-test="to-chart"
-              >To Cart</VBtn
-            >
-            <VBtn v-else @click="removeFromCart(item)" prepend-icon="mdi-cart-arrow-up"
-              >Remove</VBtn
-            >
-            <VSpacer></VSpacer>
-            <VTooltip text="More info">
-              <template #activator="{ props }">
-                <VBtn
-                  v-bind="props"
-                  @click="info(item.id)"
-                  icon="mdi-information-symbol"
-                  data-test="info-icon"
-                ></VBtn>
-              </template>
-            </VTooltip>
-          </VCardActions>
-        </VCard>
+        <ListingCard :item="item"></ListingCard>
       </VCol>
     </VRow>
   </VContainer>
