@@ -1,5 +1,6 @@
+import { useLocalStorage } from '@vueuse/core';
 import { defineStore } from 'pinia';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 
 export type CartItem = {
   name: string;
@@ -11,7 +12,7 @@ export type Cart = {
 };
 
 export const useCart = defineStore('cart', () => {
-  const cart = ref<Cart>({ items: [] });
+  const cart = useLocalStorage('cart', { items: [] as CartItem[] }, { mergeDefaults: true });
 
   function add(item: CartItem) {
     cart.value?.items.push(item);

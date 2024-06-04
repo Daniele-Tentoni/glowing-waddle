@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useCart } from '@/stores/cart';
+import { useCart, type CartItem } from '@/stores/cart';
 import { computed } from 'vue';
 import CheckoutDialog from '@/components/checkout/CheckoutDialog.vue';
 
@@ -8,6 +8,10 @@ const cart = useCart();
 const empty = computed(() => cart.cart.items?.length === 0);
 
 const total = computed(() => cart.cart.items.reduce((a, b) => a + b.price, 0));
+
+function removeCartItem(item: CartItem) {
+  cart.remove(item.name);
+}
 </script>
 <template>
   <VSheet v-if="empty">
@@ -21,7 +25,12 @@ const total = computed(() => cart.cart.items.reduce((a, b) => a + b.price, 0));
         :title="item.name"
         :subtitle="item.price"
       >
-        <VBtn prepend-icon="mdi-cart-arrow-up">Remove</VBtn>
+        <VBtn
+          prepend-icon="mdi-cart-arrow-up"
+          data-test="remove-button"
+          @click="removeCartItem(item)"
+          >Remove</VBtn
+        >
       </VListItem>
     </VList>
     <VRow>
