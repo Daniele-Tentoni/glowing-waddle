@@ -3,7 +3,9 @@ name: Test each PR against main
 on:
   pull_request:
     branches: ['main', 'next']
-    paths: ['cypress', 'src']
+    paths:
+      - 'cypress/**'
+      - 'src/**'
 
 concurrency:
   group: 'test'
