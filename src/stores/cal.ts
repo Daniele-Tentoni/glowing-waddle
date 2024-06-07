@@ -1,44 +1,12 @@
+import { first, type Cal } from '@/models/cals';
 import { useLocalStorage } from '@vueuse/core';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import { useDate } from 'vuetify';
 
-export interface Day {
-  num: number;
-  text: string;
-  thrown?: boolean;
-}
-
-export class D implements Day {
-  num: number;
-  text: string;
-  thrown?: boolean;
-
-  constructor(num: number, text: string, thrown: boolean = false) {
-    this.num = num;
-    this.text = text;
-    this.thrown = thrown;
-  }
-}
-
-export type Cal = {
-  id: string;
-  name: string;
-  days: Day[];
-};
-
 export const useCal = defineStore('cal', () => {
   const lastWrapped = useLocalStorage('cal.lastWrapped', 0, { mergeDefaults: true });
-  const cal = ref<Cal>({
-    id: 'first',
-    name: 'Primo calendario',
-    days: [
-      { num: 147, text: 'Questa è una massima' },
-      { num: 148, text: 'Questa è una massima' },
-      { num: 149, text: 'Questa è una massima' },
-      { num: 150, text: 'Questa è una massima' },
-    ],
-  });
+  const cal = ref<Cal>(first);
 
   const adapter = useDate();
 
