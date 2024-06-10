@@ -48,7 +48,7 @@ jobs:
           path: dist
 
   cypress-run:
-    runs-on: ${{ matrix.browser }}
+    runs-on: ${{ matrix.os }}
     needs: install
     strategy:
       # don't fail the entire matrix on failure
@@ -72,6 +72,6 @@ jobs:
         with:
           record: true
           parallel: true
-          group: 'UI-Chrome'
+          group: 'UI-${{ matrix.browser }}'
           start: npm run preview
           browser: ${{ matrix.browser }}
