@@ -70,7 +70,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          parallel: true
           group: 'UI-${{ matrix.browser }}'
           start: npm run preview
           browser: ${{ matrix.browser }}
