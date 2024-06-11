@@ -55,8 +55,6 @@ jobs:
       fail-fast: false
       matrix:
         browser: ['chrome', 'firefox', 'edge']
-        # run copies of the current job in parallel
-        containers: [1, 2, 3]
         os: ['ubuntu-latest', ' windows-latest']
     steps:
       - name: Checkout
